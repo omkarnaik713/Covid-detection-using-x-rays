@@ -1,13 +1,16 @@
-from flask import Flask , request, jsonify
+from flask import Flask , request, jsonify, render_template
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array
 import numpy as np 
-import io
+import pickle
 from PIL import Image 
 
-model = load_model('/Users/omkarnaik/Bankruptcy/.model.h5')
-
+model = pickle.load(open('model.pkl','rb'))
 app = Flask(__name__)
+@app.route('/')
+def index() :
+    return render_template(index.html)
+
 
 def process_image(image) :
     if image.mode != 'RGB' :
