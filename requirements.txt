@@ -36,6 +36,7 @@ opt-einsum==3.3.0
 optree==0.12.1
 packaging==24.1
 pandas==2.2.2
+pillow==10.4.0
 platformdirs==4.2.2
 pooch==1.8.2
 protobuf==4.25.4
