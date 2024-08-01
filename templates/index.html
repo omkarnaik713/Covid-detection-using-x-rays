@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid-Detection</title>
+    <link rel = "stylesheet" href="{{url_for('static',filename ='css/main.css')}}"/>
+</head>
+<body>
+    <h1>Upload your Chest X-ray below</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="fileInput">Choose an image file:</label>
+        <input type="file" id="fileInput" name="file" accept="image/*">
+        <button type="submit">Upload</button>
+    </form>
+    <script src="{{url_for('static',filename='js/script.js')}}" defer></script>
+    <div id = 'output'></div>
+</body>
+</html>

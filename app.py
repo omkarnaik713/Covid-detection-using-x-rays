@@ -1,15 +1,17 @@
-from flask import Flask , request, jsonify, render_template
-from tensorflow.keras.models import load_model
+from flask import Flask , request,render_template, jsonify
 from tensorflow.keras.preprocessing.image import img_to_array
 import numpy as np 
 import pickle
 from PIL import Image 
+from flask_cors import CORS
 
-model = pickle.load(open('model.pkl','rb'))
 app = Flask(__name__)
+CORS(app)
+model = pickle.load(open('model.pkl','rb'))
+
 @app.route('/')
-def index() :
-    return render_template(index.html)
+def index():
+    return render_template('index.html')
 
 
 def process_image(image) :
@@ -40,12 +42,9 @@ def predict():
         class_label = ['Covid','Normal','Viral Pneumonia']
         predicted_label = class_label[class_idx]
         
-        return jsonify({
-            'prediction':prediction ,
-            'prediction_label':predicted_label
-        })
+        return jsonify(predicted_label)
     except Exception as e :
-        return jsonify({'error':str(e)}),420
+        return f'Error : {str(e)}'
 
 if __name__ == '__main__' :
-    app.run(host = '0.0.0.0')
+    app.run(debug=True, port = 5000)
