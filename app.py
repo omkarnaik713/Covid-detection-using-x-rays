@@ -43,11 +43,11 @@ def predict():
         predicted_label = class_label[class_idx]
         
         if predicted_label == 'Covid':
-            return jsonify(f'You have {percent}% chance of having Covid given the X-ray')
+            return jsonify(f'You have {percent}% chance of having Covid ')
         elif predicted_label == 'Normal' :
-            return jsonify('Normal')
+            return jsonify('Your  Chest X-ray is Normal')
         else :
-            return jsonify(f'You have {percent}% chance of having Viral Pneumonia given the X-ray')
+            return jsonify(f'You have {percent}% chance of having Viral Pneumonia ')
     except Exception as e :
         return f'Error : {str(e)}'
 
