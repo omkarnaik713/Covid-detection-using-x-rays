@@ -37,12 +37,17 @@ def predict():
         image = Image.open(file)
         processed_image = process_image(image)
         prediction = model.predict(processed_image).tolist()
-        
+        percent = round(max(prediction[0]) * 100)
         class_idx = np.argmax(prediction,axis = 1)[0]
         class_label = ['Covid','Normal','Viral Pneumonia']
         predicted_label = class_label[class_idx]
         
-        return jsonify(predicted_label)
+        if predicted_label == 'Covid':
+            return jsonify(f'You have {percent}% chance of having Covid given the X-ray')
+        elif predicted_label == 'Normal' :
+            return jsonify('Normal')
+        else :
+            return jsonify(f'You have {percent}% chance of having Viral Pneumonia given the X-ray')
     except Exception as e :
         return f'Error : {str(e)}'
 
