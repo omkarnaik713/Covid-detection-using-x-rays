@@ -10,6 +10,8 @@ train_path = '/Users/omkarnaik/Covid19-Detection/Covid19-dataset/train'
 test_path = '/Users/omkarnaik/Covid19-Detection/Covid19-dataset/test'
 classes = os.listdir(test_path)
 def read_process_images(train_path,test_path):
+    '''Using ImageDataGenerator from tensorflow to extract the data from the images normalizing it and performing
+    data augmentation.'''
     train_datagen = ImageDataGenerator(rescale = 1./255,
                                     rotation_range = 10,
                                     width_shift_range = 0.1,
@@ -40,21 +42,24 @@ if __name__ == '__main__' :
     train_gen ,test_gen = read_process_images(train_path,test_path)
     ## model creation 
     model = Sequential()
-    #model.add(layers.Input(shape = (224,224,3)))
+    
+    # layer 1 - Convolutional Layer accompanied by a Average Pooling layer
     model.add(Conv2D(32,(3,3),activation = 'relu', input_shape = (128,128,3),kernel_initializer = 'he_uniform',padding = 'same'))
-    #model.add(layers.BatchNormalization())
     model.add(AveragePooling2D((2,2)))
     
+    # layer 2 - Convolutional Layer accompanied by a Average Pooling layer 
     model.add(Conv2D(64,(3,3), activation = 'relu',kernel_initializer = 'he_uniform',padding = 'same'))
-    #model.add(layers.BatchNormalization())
     model.add(AveragePooling2D((2,2)))
     
+    # layer 3 - a layer to flatten the 2D data to single dimension
     model.add(Flatten())
+    
+    # layer 4 - Dense layer followed by a dropout layer
     model.add(Dense(64,activation = 'relu',kernel_initializer = 'he_uniform', kernel_regularizer=l2(0.001)))
     model.add(Dropout(0.25))
     
+    # layer 5 - Dense layer which is responsible for the classifying the class of the input
     model.add(Dense(3,activation = 'softmax'))
-    #model.add(Dropout(0.25))
     
     params = {'learning_rate': 0.00075, 'epsilon' : 1e-07}
     
