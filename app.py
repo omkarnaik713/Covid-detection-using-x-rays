@@ -13,6 +13,9 @@ model = pickle.load(open('model.pkl','rb'))
 def index():
     return render_template('index.html')
 
+@app.route('/ping')
+def ping():
+    return 200  
 
 def process_image(image) :
     if image.mode != 'RGB' :
@@ -52,4 +55,4 @@ def predict():
         return f'Error : {str(e)}'
 
 if __name__ == '__main__' :
-    app.run(host = '0.0.0.0',port = 5000)
+    app.run(port = 5000)
