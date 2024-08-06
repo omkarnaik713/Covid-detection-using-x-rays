@@ -6,7 +6,7 @@ document.getElementById('uploadForm').addEventListener('submit',async function (
     formData.append('file',fileInput.files[0]);
 
     try {
-        const response = await fetch('https://x-ray-check.onrender.com/predict',{
+        const response = await fetch('https://0.0.0.0:5000/predict',{
             method : 'POST',
             body : formData
         });
