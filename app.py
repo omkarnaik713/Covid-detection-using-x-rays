@@ -13,7 +13,7 @@ model = pickle.load(open('model.pkl','rb'))
 def index():
     return render_template('index.html')
 
-@app.route('/ping')
+@app.route('/ping', method = ['HEAD', 'GET'])
 def ping():
     return 200  
 
