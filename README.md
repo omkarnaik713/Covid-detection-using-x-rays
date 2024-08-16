@@ -9,7 +9,7 @@ The project is currently deployed on render. To check out the working model visi
 
 ## Demo
 
-[X-ray Analyzer](Image/image.png)
+![X-ray Analyzer](Image/image.png)
 
 ## Description
 
