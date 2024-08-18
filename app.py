@@ -15,7 +15,7 @@ def index():
 
 @app.route('/ping', methods = ['HEAD', 'GET'])
 def ping():
-    return 200  
+    return 'OK',200  
 
 def process_image(image) :
     if image.mode != 'RGB' :
